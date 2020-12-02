@@ -14,7 +14,7 @@ s3 = boto3.resource(
 bucketname=getenv('s3sample_bucketname')
 
 # put your github name here.
-your_github_name='xt0fer'
+your_github_name=None
 if your_github_name is None:
     raise KeyError("missing a GitHub handle in script")
    
