@@ -14,7 +14,7 @@ s3 = boto3.resource(
 bucketname=getenv('s3sample_bucketname')
 
 # put your github name here.
-your_github_name=None
+your_github_name=getenv('s3sample_github_name')
 if your_github_name is None:
     raise KeyError("missing a GitHub handle in script")
    
@@ -41,16 +41,19 @@ def upload_file(resource, file_name, bucket, object_name=None):
     return True
 
 
-    
-your_folder='students/' + your_github_name + '/'
-your_filename='kristofer.txt'
-objectname = your_folder + your_filename
+def main():
+    your_folder='students/' + your_github_name + '/'
+    your_filename='kristofer.txt'
+    objectname = your_folder + your_filename
+    print(objectname)
+    if upload_file(s3, your_filename, bucketname, objectname) :
+        print('upload successful')
+    else :
+        print('upload NOT successful')
 
-if upload_file(s3, your_filename, bucketname, objectname) :
-    print('upload successful')
-else :
-    print('upload NOT successful')
+    with open('downloadfile', 'wb') as f:
+        s3.meta.client.download_fileobj(bucketname, objectname, f)
+        print('download successful')
 
-with open('downloadfile', 'wb') as f:
-    s3.meta.client.download_fileobj(bucketname, objectname, f)
-    print('download successful')
+if __name__ == '__main__':
+    main()
