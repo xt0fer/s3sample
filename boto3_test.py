@@ -6,12 +6,17 @@ from botocore.exceptions import ClientError
 
 s3 = boto3.resource(
     service_name='s3',
-    region_name='us-east-1',
+    region_name=getenv('s3sample_region_name'),
     aws_access_key_id = getenv('aws_access_key'),
     aws_secret_access_key = getenv('aws_secret_key')
 )
 
-bucketname='data1-2-zcw'
+bucketname=getenv('s3sample_bucketname')
+
+# put your github name here.
+your_github_name=None
+if your_github_name is None:
+    raise KeyError("missing a GitHub handle in script")
 
 # Output the bucket names
 print('get bucket?')
@@ -43,7 +48,7 @@ def upload_file(resource, file_name, bucket, object_name=None):
 
 
     
-your_folder='students/xt0fer/'
+your_folder='students/' + your_github_name + '/'
 your_filename='kristofer.txt'
 objectname = your_folder + your_filename
 
