@@ -14,16 +14,10 @@ s3 = boto3.resource(
 bucketname=getenv('s3sample_bucketname')
 
 # put your github name here.
-your_github_name=None
+your_github_name='xt0fer'
 if your_github_name is None:
     raise KeyError("missing a GitHub handle in script")
-
-# Output the bucket names
-print('get bucket?')
-for bucket in s3.buckets.all():
-    if bucketname == bucket.__str__():
-        print('found ', bucketname)
-    
+   
     
 def upload_file(resource, file_name, bucket, object_name=None):
     """Upload a file to an S3 bucket
