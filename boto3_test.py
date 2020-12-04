@@ -43,7 +43,7 @@ def upload_file(resource, file_name, bucket, object_name=None):
 
 def main():
     your_folder='students/' + your_github_name + '/'
-    your_filename='kristofer.txt'
+    your_filename='kristofer.txt' # PUT YOUR FILENAME HERE
     objectname = your_folder + your_filename
     print(objectname)
     if upload_file(s3, your_filename, bucketname, objectname) :
